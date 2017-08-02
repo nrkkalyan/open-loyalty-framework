@@ -1,0 +1,6 @@
+open_loyalty_pagination:
+    page_field_name: page
+    per_page_field_name: perPage
+    sort_field_name: sort
+    sort_direction_field_name: direction
+    per_page_default: 10

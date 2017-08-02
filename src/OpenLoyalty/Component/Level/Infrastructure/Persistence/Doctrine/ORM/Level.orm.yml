@@ -1,0 +1,42 @@
+OpenLoyalty\Component\Level\Domain\Level:
+  type: entity
+  repositoryClass: OpenLoyalty\Component\Level\Infrastructure\Persistence\Doctrine\Repository\DoctrineLevelRepository
+  table: ol__level
+  id:
+    levelId:
+      type: level_id
+      column: level_id
+  fields:
+    name:
+      type: string
+    description:
+      type: text
+      nullable: true
+    conditionValue:
+      type: decimal
+      precision: 14
+      scale: 2
+      column: condition_value
+    active:
+      type: boolean
+      options:
+        default: 0
+    customersCount:
+      type: integer
+      nullable: true
+      column: customers_count
+    minOrder:
+      type: decimal
+      precision: 14
+      scale: 2
+      column: min_order
+      nullable: true
+  embedded:
+    reward:
+      class: OpenLoyalty\Component\Level\Domain\Model\Reward
+  oneToMany:
+    specialRewards:
+      targetEntity: OpenLoyalty\Component\Level\Domain\SpecialReward
+      mappedBy: level
+      cascade: ["ALL"]
+      orphanRemoval: true

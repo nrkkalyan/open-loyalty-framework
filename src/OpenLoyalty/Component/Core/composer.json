@@ -1,0 +1,16 @@
+{
+  "name": "openloyalty/core",
+  "description": "OpenLoyalty Core component",
+  "type": "library",
+  "require": {
+    "broadway/broadway": "^0.9.0",
+    "elasticsearch/elasticsearch": "^2.2"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Component\\Core\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  }
+}

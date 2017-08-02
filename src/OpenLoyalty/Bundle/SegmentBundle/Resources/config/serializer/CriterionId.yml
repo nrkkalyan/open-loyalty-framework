@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Segment\Domain\CriterionId:
+  exlusion_policy: ALL
+  properties:
+    criterionId:
+      expose: true
+      serialized_name: criterionId

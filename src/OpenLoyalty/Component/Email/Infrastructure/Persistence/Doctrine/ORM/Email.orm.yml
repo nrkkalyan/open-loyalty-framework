@@ -1,0 +1,25 @@
+OpenLoyalty\Component\Email\Domain\Email:
+  type: entity
+  repositoryClass: OpenLoyalty\Component\Email\Infrastructure\Persistence\Doctrine\Repository\DoctrineEmailRepository
+  table: ol__email
+  id:
+    emailId:
+      type: email_id
+      column: email_id
+  fields:
+    key:
+      type: string
+      unique: true
+      column: "`key`"
+    subject:
+      type: string
+    content:
+      type: text
+    senderName:
+      type: string
+      column: sender_name
+    senderEmail:
+      type: string
+      column: sender_email
+    updatedAt:
+      type: datetime

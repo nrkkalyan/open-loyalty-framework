@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtMakers:
+  type: entity
+  fields:
+    makers:
+      type: json_array
+      column: makers

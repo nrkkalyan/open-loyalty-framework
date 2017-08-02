@@ -1,0 +1,12 @@
+doctrine:
+    dbal:
+        types:
+          level_id: OpenLoyalty\Component\Level\Infrastructure\Persistence\Doctrine\Type\LevelIdDoctrineType
+          special_reward_id: OpenLoyalty\Component\Level\Infrastructure\Persistence\Doctrine\Type\SpecialRewardIdDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Level:
+          namespace_prefix: "OpenLoyalty\\Component\\Level\\Domain"
+          path: "@OpenLoyaltyLevelBundle/Resources/config/serializer"

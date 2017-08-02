@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Segment\Domain\Segment:
+  exlusion_policy: ALL
+  properties:
+    segmentId:
+      expose: true
+      inline: true

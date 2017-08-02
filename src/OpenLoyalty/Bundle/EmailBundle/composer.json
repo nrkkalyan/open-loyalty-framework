@@ -1,0 +1,24 @@
+{
+  "name": "openloyalty/email-bundle",
+  "description": "OpenLoyalty EmailBundle",
+  "type": "symfony-bundle",
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/symfony": "3.2.*",
+    "symfony/swiftmailer-bundle": "^2.3",
+    "openloyalty/core": "dev-master"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Bundle\\EmailBundle\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/core.git"
+    }
+  ]
+}

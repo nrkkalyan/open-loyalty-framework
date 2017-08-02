@@ -1,0 +1,26 @@
+OpenLoyalty\Component\EarningRule\Domain\EarningRule:
+  exlusion_policy: ALL
+  discriminator:
+    field_name: type
+    map:
+      points: OpenLoyalty\Component\EarningRule\Domain\PointsEarningRule
+      event: OpenLoyalty\Component\EarningRule\Domain\EventEarningRule
+      custom_event: OpenLoyalty\Component\EarningRule\Domain\CustomEventEarningRule
+      product_purchase: OpenLoyalty\Component\EarningRule\Domain\ProductPurchaseEarningRule
+      multiply_for_product: OpenLoyalty\Component\EarningRule\Domain\MultiplyPointsForProductEarningRule
+      referral: OpenLoyalty\Component\EarningRule\Domain\ReferralEarningRule
+  properties:
+    earningRuleId:
+      expose: true
+      inline: true
+    levels:
+      exclude: true
+    segments:
+      exclude: true
+  virtual_properties:
+      getFlatLevels:
+          serialized_name: levels
+          type: array
+      getFlatSegments:
+          serialized_name: segments
+          type: array

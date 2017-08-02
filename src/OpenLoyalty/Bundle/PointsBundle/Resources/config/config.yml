@@ -1,0 +1,6 @@
+jms_serializer:
+    metadata:
+      directories:
+        Account:
+          namespace_prefix: "OpenLoyalty\\Component\\Account\\Domain"
+          path: "@OpenLoyaltyPointsBundle/Resources/config/serializer"

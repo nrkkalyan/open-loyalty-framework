@@ -1,0 +1,121 @@
+services:
+  oloy.segment.command_handler:
+    class: OpenLoyalty\Component\Segment\Domain\Command\SegmentCommandHandler
+    arguments:
+      - '@oloy.segment.repository'
+      - '@oloy.segment.part_repository'
+      - '@broadway.event_dispatcher'
+    lazy: true
+    tags:
+      - { name: command_handler }
+  oloy.segment.repository:
+    class: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Repository\DoctrineSegmentRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\Segment\Domain\Segment'
+  oloy.segment.part_repository:
+    class: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Repository\DoctrineSegmentPartRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\Segment\Domain\Model\SegmentPart'
+
+  oloy.segment.read_model.repository.segmented_customers:
+    class: 'Broadway\ReadModel\ReadModel'
+    factory: ['@oloy.user.read_model.repository_factory', create]
+    arguments:
+      - 'oloy.segmented_customers'
+      - 'OpenLoyalty\Component\Segment\Domain\ReadModel\SegmentedCustomers'
+      - 'OpenLoyalty\Component\Segment\Infrastructure\Repository\SegmentedCustomersElasticsearchRepository'
+  oloy.segment.read_model.projector.segmented_customers:
+    class: OpenLoyalty\Component\Segment\Domain\ReadModel\SegmentedCustomersProjector
+    arguments:
+      - '@oloy.segment.read_model.repository.segmented_customers'
+      - '@oloy.segment.repository'
+      - '@broadway.event_dispatcher'
+      - '@oloy.user.read_model.repository.customer_details'
+    calls:
+      - [setLogger, ['@logger']]
+  oloy.segment.segmentation_provider:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\SegmentationProvider
+    calls:
+      - [ setLogger, ['@logger']]
+  oloy.segment.evaluator.bought_in_pos:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\BoughtInPosEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.transaction_count:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\TransactionCountEvaluator
+    arguments:
+      - '@oloy.user.read_model.repository.customer_details'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.average_transaction_amount:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\AverageTransactionAmountEvaluator
+    arguments:
+      - '@oloy.user.read_model.repository.customer_details'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.transaction_amount:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\TransactionAmountEvaluator
+    arguments:
+      - '@oloy.user.read_model.repository.customer_details'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.anniversary:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\AnniversaryEvaluator
+    arguments:
+      - '@oloy.user.read_model.repository.customer_details'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.purchase_in_period:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\PurchasePeriodEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.last_purchase_n_days_before:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\LastPurchaseNDaysBeforeEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.transaction_percent_in_pos:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\TransactionPercentInPosEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.bought_skus:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\BoughtSKUsEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.bought_makers:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\BoughtMakersEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+  oloy.segment.evaluator.bought_labels:
+    class: OpenLoyalty\Component\Segment\Domain\Segmentation\CriteriaEvaluators\BoughtLabelsEvaluator
+    arguments:
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.segment.customer_validator'
+    tags:
+      - { name: oloy_segmentation_evaluator }
+
+  oloy.segment.recalculate.segment:
+    class: 'OpenLoyalty\Component\Segment\Infrastructure\SystemEvent\Listener\RecalculateSegment'
+    tags:
+      - { name: broadway.event_listener, event: oloy.segment.changed, method: handle }
+    arguments:
+      - '@kernel'

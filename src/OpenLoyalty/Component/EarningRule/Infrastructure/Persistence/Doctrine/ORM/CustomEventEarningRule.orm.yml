@@ -1,0 +1,14 @@
+OpenLoyalty\Component\EarningRule\Domain\CustomEventEarningRule:
+  type: entity
+  fields:
+    eventName:
+      type: string
+      column: event_name
+    pointsAmount:
+      type: decimal
+      scale: 2
+      precision: 14
+      column: points_amount
+  embedded:
+    limit:
+      class: OpenLoyalty\Component\EarningRule\Domain\EarningRuleLimit

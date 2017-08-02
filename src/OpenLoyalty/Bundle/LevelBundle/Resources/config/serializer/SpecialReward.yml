@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Level\Domain\SpecialReward:
+  exlusion_policy: ALL
+  properties:
+    specialRewardId:
+      expose: true
+      inline: true

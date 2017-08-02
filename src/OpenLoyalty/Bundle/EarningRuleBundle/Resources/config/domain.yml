@@ -1,0 +1,40 @@
+services:
+  oloy.earning_rule.command_handler:
+    class: OpenLoyalty\Component\EarningRule\Domain\Command\EarningRuleCommandHandler
+    arguments:
+      - '@oloy.earning_rule.repository'
+      - '@broadway.uuid.generator'
+    lazy: true
+    tags:
+      - { name: command_handler }
+  oloy.earning_rule.repository:
+    class: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Repository\DoctrineEarningRuleRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\EarningRule\Domain\EarningRule'
+  oloy.earning_rule.usage_repository:
+    class: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Repository\DoctrineEarningRuleUsageRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\EarningRule\Domain\EarningRuleUsage'
+  oloy.earning_rule.algorithm.points_earning:
+    class: OpenLoyalty\Component\EarningRule\Domain\Algorithm\PointsEarningRuleAlgorithm
+    tags:
+      - { name: oloy.earning_rule.algorithm, alias: PointsEarningRule }
+  oloy.earning_rule.algorithm.product_purchase:
+    class: OpenLoyalty\Component\EarningRule\Domain\Algorithm\ProductPurchaseEarningRuleAlgorithm
+    tags:
+      - { name: oloy.earning_rule.algorithm, alias: ProductPurchaseEarningRule }
+  oloy.earning_rule.algorithm.multiply_points_for_product:
+    class: OpenLoyalty\Component\EarningRule\Domain\Algorithm\MultiplyPointsForProductRuleAlgorithm
+    tags:
+      - { name: oloy.earning_rule.algorithm, alias: MultiplyPointsForProductEarningRule }
+  oloy.earning_rule.applier:
+    class: OpenLoyalty\Component\EarningRule\Domain\OloyEarningRuleEvaluator
+    arguments:
+      - '@oloy.earning_rule.repository'
+      - '@oloy.transaction.read_model.repository.transaction_details'
+      - '@oloy.earning_rule.algorithm_factory'
+      - '@oloy.user.read_model.repository.invitation_details'
+      - '@oloy.segment.read_model.repository.segmented_customers'
+      - '@oloy.user.read_model.repository.customer_details'

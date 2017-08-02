@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Campaign\Domain\CampaignId:
+  exlusion_policy: ALL
+  properties:
+    campaignId:
+      expose: true
+      serialized_name: campaignId

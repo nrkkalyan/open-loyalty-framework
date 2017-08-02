@@ -1,0 +1,94 @@
+{
+  "name": "openloyalty/earning-rule-bundle",
+  "description": "OpenLoyalty EarningRuleBundle",
+  "type": "symfony-bundle",
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/symfony": "3.2.*",
+    "doctrine/orm": "^2.5",
+    "doctrine/doctrine-bundle": "^1.6",
+    "doctrine/doctrine-cache-bundle": "^1.2",
+    "symfony/monolog-bundle": "^2.8",
+    "symfony/polyfill-apcu": "^1.0",
+    "sensio/distribution-bundle": "^5.0",
+    "sensio/framework-extra-bundle": "^3.0.2",
+    "friendsofsymfony/rest-bundle": "^2.0",
+    "doctrine/doctrine-fixtures-bundle": "^2.3",
+    "jms-serializer/serializer-bundle": "^1.1",
+    "gesdinet/jwt-refresh-token-bundle": "^0.1.7",
+    "symfony/swiftmailer-bundle": "^2.3",
+    "fzaninotto/faker": "^1.6",
+    "openloyalty/core": "dev-master",
+    "openloyalty/customer": "dev-master",
+    "openloyalty/level": "dev-master",
+    "openloyalty/transaction": "dev-master",
+    "openloyalty/pos": "dev-master",
+    "openloyalty/segment": "dev-master",
+    "openloyalty/seller": "dev-master",
+    "openloyalty/earning-rule": "dev-master",
+    "openloyalty/email-bundle": "dev-master",
+    "openloyalty/campaign": "dev-master",
+    "openloyalty/account": "dev-master",
+    "openloyalty/user-bundle": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Bundle\\EarningRuleBundle\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/level.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/transaction.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/account.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/core.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/customer.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/pos.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/segment.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/earning-rule.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/seller.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/email-bundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/campaign.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/user-bundle.git"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+doctrine:
+    dbal:
+        types:
+            campaign_id: OpenLoyalty\Component\Campaign\Infrastructure\Persistence\Doctrine\Type\CampaignIdDoctrineType
+            campaign_levels_json_array: OpenLoyalty\Component\Campaign\Infrastructure\Persistence\Doctrine\Type\CampaignLevelsJsonArrayDoctrineType
+            campaign_segments_json_array: OpenLoyalty\Component\Campaign\Infrastructure\Persistence\Doctrine\Type\CampaignSegmentsJsonArrayDoctrineType
+            campaign_coupons_json_array: OpenLoyalty\Component\Campaign\Infrastructure\Persistence\Doctrine\Type\CampaignCouponsJsonArrayDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Campaign:
+          namespace_prefix: "OpenLoyalty\\Component\\Campaign\\Domain"
+          path: "@OpenLoyaltyCampaignBundle/Resources/config/serializer"
+
+open_loyalty_campaign:
+  photos_adapter: "%campaign_photos_adapter%"
+  photos_adapter_env: "%campaign_photos_adapter_env%"
+  photos_min_width: 600
+  photos_min_height: 600

@@ -1,0 +1,12 @@
+doctrine:
+    dbal:
+        types:
+          pos_id: OpenLoyalty\Component\Pos\Infrastructure\Persistence\Doctrine\Type\PosIdDoctrineType
+          ol_geo_point: OpenLoyalty\Component\Pos\Infrastructure\Persistence\Doctrine\Type\GeoPointDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Pos:
+          namespace_prefix: "OpenLoyalty\\Component\\Pos\\Domain"
+          path: "@OpenLoyaltyPosBundle/Resources/config/serializer"

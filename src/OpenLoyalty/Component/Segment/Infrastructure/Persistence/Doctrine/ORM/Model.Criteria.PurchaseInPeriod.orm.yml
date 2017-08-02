@@ -1,0 +1,9 @@
+OpenLoyalty\Component\Segment\Domain\Model\Criteria\PurchaseInPeriod:
+  type: entity
+  fields:
+    fromDate:
+      type: datetime
+      column: from_date
+    toDate:
+      type: datetime
+      column: to_date

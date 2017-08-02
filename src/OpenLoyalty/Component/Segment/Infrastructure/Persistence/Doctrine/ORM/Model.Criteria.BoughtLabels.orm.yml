@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtLabels:
+  type: entity
+  fields:
+    labels:
+      type: json_array
+      column: labels

@@ -1,0 +1,11 @@
+doctrine:
+    dbal:
+        types:
+            email_id: OpenLoyalty\Component\Email\Infrastructure\Persistence\Doctrine\Type\EmailIdDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Email:
+          namespace_prefix: "OpenLoyalty\\Component\\Email\\Domain"
+          path: "@OpenLoyaltyEmailSettingsBundle/Resources/config/serializer"

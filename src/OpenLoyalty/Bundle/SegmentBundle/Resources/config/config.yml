@@ -1,0 +1,13 @@
+doctrine:
+    dbal:
+        types:
+          segment_id: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Type\SegmentIdDoctrineType
+          segment_part_id: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Type\SegmentPartIdDoctrineType
+          criterion_id: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Type\CriterionIdDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Segment:
+          namespace_prefix: "OpenLoyalty\\Component\\Segment\\Domain"
+          path: "@OpenLoyaltySegmentBundle/Resources/config/serializer"

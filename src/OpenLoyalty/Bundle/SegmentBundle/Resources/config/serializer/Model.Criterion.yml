@@ -1,0 +1,20 @@
+OpenLoyalty\Component\Segment\Domain\Model\Criterion:
+  exlusion_policy: ALL
+  discriminator:
+      field_name: type
+      map:
+        bought_in_pos: OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtInPos
+        transaction_count: OpenLoyalty\Component\Segment\Domain\Model\Criteria\TransactionCount
+        average_transaction_amount: OpenLoyalty\Component\Segment\Domain\Model\Criteria\AverageTransactionAmount
+        anniversary: OpenLoyalty\Component\Segment\Domain\Model\Criteria\Anniversary
+        purchase_period: OpenLoyalty\Component\Segment\Domain\Model\Criteria\PurchaseInPeriod
+        last_purchase_n_days_before: OpenLoyalty\Component\Segment\Domain\Model\Criteria\LastPurchaseNDaysBefore
+        transaction_amount: OpenLoyalty\Component\Segment\Domain\Model\Criteria\TransactionAmount
+        transaction_percent_in_pos: OpenLoyalty\Component\Segment\Domain\Model\Criteria\TransactionPercentInPos
+        bought_skus: OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtSKUs
+        bought_makers: OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtMakers
+        bought_labels: OpenLoyalty\Component\Segment\Domain\Model\Criteria\BoughtLabels
+  properties:
+    criterionId:
+      expose: true
+      inline: true

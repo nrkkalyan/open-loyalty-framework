@@ -1,0 +1,9 @@
+OpenLoyalty\Component\Segment\Domain\Model\Criteria\Anniversary:
+  type: entity
+  fields:
+    days:
+      type: integer
+      column: days
+    anniversaryType:
+      type: string
+      column: anniversary_type

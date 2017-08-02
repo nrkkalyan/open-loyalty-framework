@@ -1,0 +1,11 @@
+doctrine:
+    dbal:
+        types:
+            audit_log_id: OpenLoyalty\Component\Audit\Infrastructure\Persistence\Doctrine\Type\AuditLogIdDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Audit:
+          namespace_prefix: "OpenLoyalty\\Component\\Audit\\Domain"
+          path: "@OpenLoyaltyAuditBundle/Resources/config/serializer"

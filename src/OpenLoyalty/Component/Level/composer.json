@@ -1,0 +1,19 @@
+{
+  "name": "openloyalty/level",
+  "description": "OpenLoyalty Level component",
+  "type": "library",
+  "require": {
+    "broadway/broadway": "^0.9.0",
+    "elasticsearch/elasticsearch": "^2.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Component\\Level\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  }
+}

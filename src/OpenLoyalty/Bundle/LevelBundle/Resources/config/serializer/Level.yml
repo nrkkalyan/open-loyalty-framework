@@ -1,0 +1,6 @@
+OpenLoyalty\Component\Level\Domain\Level:
+  exlusion_policy: ALL
+  properties:
+    levelId:
+      expose: true
+      inline: true

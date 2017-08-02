@@ -1,0 +1,25 @@
+OpenLoyalty\Component\Segment\Domain\Model\SegmentPart:
+  type: entity
+  repositoryClass: OpenLoyalty\Component\Segment\Infrastructure\Persistence\Doctrine\Repository\DoctrineSegmentPartRepository
+  table: ol__segment_part
+  id:
+    segmentPartId:
+      type: segment_part_id
+      column: segment_part_id
+  oneToMany:
+    criteria:
+      targetEntity: OpenLoyalty\Component\Segment\Domain\Model\Criterion
+      mappedBy: segmentPart
+      cascade: ["ALL"]
+      orphanRemoval: true
+  manyToOne:
+    segment:
+      targetEntity: OpenLoyalty\Component\Segment\Domain\Segment
+      inversedBy: parts
+      orphanRemoval: true
+      joinColumn:
+        name: segment_id
+        onDelete: "SET NULL"
+        referencedColumnName: segment_id
+
+

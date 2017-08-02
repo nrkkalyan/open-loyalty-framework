@@ -1,0 +1,47 @@
+imports:
+  - { resource: "@OpenLoyaltyAnalyticsBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyAuditBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyCampaignBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyEarningRuleBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyEmailBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyEmailSettingsBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyLevelBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyPaginationBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyPluginBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyPointsBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyPosBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltySegmentBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltySettingsBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyTransactionBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyUserBundle/Resources/config/config.yml"}
+  - { resource: "@OpenLoyaltyUtilityBundle/Resources/config/config.yml"}
+
+doctrine:
+    dbal:
+        types:
+            sku: OpenLoyalty\Component\Core\Infrastructure\Persistence\Doctrine\Type\SKUDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        Domain:
+          namespace_prefix: "OpenLoyalty\\Component\\Core"
+          path: "@OpenLoyaltyCoreBundle/Resources/config/serializer"
+
+knp_gaufrette:
+  adapters:
+    frontend_translations:
+      local:
+        directory: "%kernel.root_dir%/Resources/frontend_translations"
+        create:     true
+    campaign_photos_local:
+      local:
+        directory: "%kernel.root_dir%/uploads/"
+        create:     true
+  filesystems:
+    frontend_translations:
+      adapter: frontend_translations
+      alias: frontend_translations_filesystem
+    campaign_photos:
+      adapter: "%oloy.campaign.photos_adapter%"
+      alias: campaign_photos_filesystem

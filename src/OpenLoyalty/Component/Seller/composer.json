@@ -1,0 +1,31 @@
+{
+  "name": "openloyalty/seller",
+  "description": "OpenLoyalty Seller component",
+  "type": "library",
+  "require": {
+    "broadway/broadway": "^0.9.0",
+    "elasticsearch/elasticsearch": "^2.2",
+    "openloyalty/core": "dev-master",
+    "openloyalty/pos": "dev-master"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Component\\Seller\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/core.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/pos.git"
+    }
+  ]
+}

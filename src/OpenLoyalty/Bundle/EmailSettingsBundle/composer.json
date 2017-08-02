@@ -1,0 +1,28 @@
+{
+  "name": "openloyalty/email-settings-bundle",
+  "description": "OpenLoyalty EmailSettingsBundle",
+  "type": "symfony-bundle",
+  "require": {
+    "php": ">=5.5.9",
+    "symfony/symfony": "3.2.*",
+    "openloyalty/core": "dev-master",
+    "openloyalty/email": "dev-master"
+  },
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": { "OpenLoyalty\\Bundle\\EmailSettingsBundle\\": "" },
+    "exclude-from-classmap": [
+      "/Tests/"
+    ]
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/core.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@gitlab.divante.pl:60022/open-loyalty/email.git"
+    }
+  ]
+}

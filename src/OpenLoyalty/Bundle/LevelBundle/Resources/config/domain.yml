@@ -1,0 +1,20 @@
+services:
+  oloy.level.command_handler:
+    class: OpenLoyalty\Component\Level\Domain\Command\LevelCommandHandler
+    arguments:
+      - '@oloy.level.repository'
+      - '@oloy.special_reward.repository'
+    lazy: true
+    tags:
+      - { name: command_handler }
+  oloy.level.repository:
+    class: OpenLoyalty\Component\Level\Infrastructure\Persistence\Doctrine\Repository\DoctrineLevelRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\Level\Domain\Level'
+
+  oloy.special_reward.repository:
+    class: OpenLoyalty\Component\Level\Infrastructure\Persistence\Doctrine\Repository\DoctrineSpecialRewardRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - 'OpenLoyalty\Component\Level\Domain\SpecialReward'

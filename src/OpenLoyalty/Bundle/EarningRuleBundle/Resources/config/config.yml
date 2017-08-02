@@ -1,0 +1,17 @@
+doctrine:
+    dbal:
+        types:
+            labels_json_array: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\LabelsJsonArrayDoctrineType
+            skus_json_array: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\SKUsJsonArrayDoctrineType
+            earning_rule_id: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\EarningRuleIdDoctrineType
+            earning_rule_usage_id: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\EarningRuleUsageIdDoctrineType
+            earning_rule_usage_subject: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\EarningRuleUsageSubjectDoctrineType
+            earning_rule_levels_json_array: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\EarningRuleLevelsJsonArrayDoctrineType
+            earning_rule_segments_json_array: OpenLoyalty\Component\EarningRule\Infrastructure\Persistence\Doctrine\Type\EarningRuleSegmentsJsonArrayDoctrineType
+
+jms_serializer:
+    metadata:
+      directories:
+        EarningRule:
+          namespace_prefix: "OpenLoyalty\\Component\\EarningRule\\Domain"
+          path: "@OpenLoyaltyEarningRuleBundle/Resources/config/serializer"
