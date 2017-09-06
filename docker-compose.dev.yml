@@ -2,4 +2,4 @@
 backend:
   volumes:
     - .:/var/www/ol/backend
-    - ./docker/xdebug.ini:/usr/local/etc/php.d/xdebug.ini
+    - ./docker/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini

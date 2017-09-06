@@ -3,6 +3,7 @@
  * Copyright © 2017 Divante, Inc. All rights reserved.
  * See LICENSE for license details.
  */
+
 namespace OpenLoyalty\Bundle\EmailSettingsBundle\Mailer;
 
 use OpenLoyalty\Bundle\EmailBundle\Mailer\OloySwiftmailerMailer as BaseMailer;
@@ -34,12 +35,16 @@ class OloySwiftmailerMailer extends BaseMailer
      * @param DoctrineEmailRepositoryInterface $emailRepository
      * @param Twig_Environment                 $twig
      */
-    public function __construct(TwigEngine $twigEngine, Swift_Mailer $swiftmailer, DoctrineEmailRepositoryInterface $emailRepository, Twig_Environment $twig)
-    {
+    public function __construct(
+        TwigEngine $twigEngine,
+        Swift_Mailer $swiftmailer,
+        DoctrineEmailRepositoryInterface $emailRepository,
+        Twig_Environment $twig
+    ) {
         parent::__construct($twigEngine, $swiftmailer);
 
         $this->emailRepository = $emailRepository;
-        $this->twig = $twig;
+        $this->twig            = $twig;
     }
 
     /**
@@ -51,7 +56,11 @@ class OloySwiftmailerMailer extends BaseMailer
 
         // decorate message with data from database
         if ($emailTemplate = $this->getEmailTemplate($message->getTemplate())) {
-            $message->setSubject($emailTemplate->getSubject());
+            $newSubject = $emailTemplate->getSubject();
+            foreach ($message->getParams() as $search => $value) {
+                $newSubject = str_replace('{{ '.$search.' }}', $value, $newSubject);
+            }
+            $message->setSubject($newSubject);
             $message->setSenderName($emailTemplate->getSenderName());
             $message->setSenderEmail($emailTemplate->getSenderEmail());
 
