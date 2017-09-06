@@ -29,7 +29,7 @@ parameters:
     mailer_from_name: open@oloy.com
 
     frontend_password_reset_url: 'localhost:8182/#!/password/reset'
-    frontend_activate_account_url: 'localhost:8182/#!/customer/panel/customer/registration/activate'
+    frontend_activate_account_url: '#!/customer/panel/customer/registration/activate'
     frontend_customer_panel_url: 'http://localhost:8183/'
     loyalty_program_name: OpenLoyalty
     ecommerce_address: http://ecommerce.local

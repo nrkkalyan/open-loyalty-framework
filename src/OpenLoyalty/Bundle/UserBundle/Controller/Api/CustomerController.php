@@ -3,6 +3,7 @@
  * Copyright © 2017 Divante, Inc. All rights reserved.
  * See LICENSE for license details.
  */
+
 namespace OpenLoyalty\Bundle\UserBundle\Controller\Api;
 
 use Broadway\ReadModel\RepositoryInterface;
@@ -83,9 +84,9 @@ class CustomerController extends FOSRestController
     public function listAction(Request $request, ParamFetcher $paramFetcher)
     {
         $types = [
-            'transactionsAmount' => 'number',
+            'transactionsAmount'       => 'number',
             'averageTransactionAmount' => 'number',
-            'transactionsCount' => 'number',
+            'transactionsCount'        => 'number',
         ];
 
         $params = $this->get('oloy.user.param_manager')->stripNulls($paramFetcher->all(), true, true, $types);
@@ -93,7 +94,7 @@ class CustomerController extends FOSRestController
             $days = $params['daysFromLastTransaction'];
             unset($params['daysFromLastTransaction']);
             $params['lastTransactionDate'] = [
-                'type' => 'range',
+                'type'  => 'range',
                 'value' => [
                     'gte' => (new \DateTime('-'.$days.' days'))->getTimestamp(),
                 ],
@@ -103,7 +104,7 @@ class CustomerController extends FOSRestController
             $hoursFromLastUpdate = $params['hoursFromLastUpdate'];
             unset($params['hoursFromLastUpdate']);
             $params['updatedAt'] = [
-                'type' => 'range',
+                'type'  => 'range',
                 'value' => [
                     'gte' => (new \DateTime('-'.$hoursFromLastUpdate.' hours'))->getTimestamp(),
                 ],
@@ -112,7 +113,7 @@ class CustomerController extends FOSRestController
         $pagination = $this->get('oloy.pagination')->handleFromRequest($request, 'createdAt', 'desc');
 
         /** @var CustomerDetailsRepository $repo */
-        $repo = $this->get('oloy.user.read_model.repository.customer_details');
+        $repo      = $this->get('oloy.user.read_model.repository.customer_details');
         $customers = $repo->findByParametersPaginated(
             $params,
             $request->get('strict', false),
@@ -121,12 +122,12 @@ class CustomerController extends FOSRestController
             $pagination->getSort(),
             $pagination->getSortDirection()
         );
-        $total = $repo->countTotal($params, $request->get('strict', false));
+        $total     = $repo->countTotal($params, $request->get('strict', false));
 
         return $this->view(
             [
                 'customers' => $customers,
-                'total' => $total,
+                'total'     => $total,
             ],
             200
         );
@@ -155,10 +156,10 @@ class CustomerController extends FOSRestController
             200
         );
         /** @var SegmentedCustomersRepository $repo */
-        $repo = $this->get('oloy.segment.read_model.repository.segmented_customers');
-        $segments = $repo->findBy(['customerId' => $customer->getCustomerId()->__toString()]);
+        $repo       = $this->get('oloy.segment.read_model.repository.segmented_customers');
+        $segments   = $repo->findBy(['customerId' => $customer->getCustomerId()->__toString()]);
         $serializer = $this->get('serializer');
-        $segments = array_map(
+        $segments   = array_map(
             function (SegmentedCustomers $segment) use ($serializer) {
                 return $serializer->toArray($segment);
             },
@@ -200,7 +201,7 @@ class CustomerController extends FOSRestController
         $customers = $repo->findByParameters(
             [
                 'createdAt' => [
-                    'type' => 'range',
+                    'type'  => 'range',
                     'value' => [
                         'gte' => $date->getTimestamp(),
                     ],
@@ -209,7 +210,7 @@ class CustomerController extends FOSRestController
         );
 
         $result = [];
-        $now = new \DateTime();
+        $now    = new \DateTime();
         $now->setTime(0, 0, 0);
 
         while ($date < $now) {
@@ -234,24 +235,24 @@ class CustomerController extends FOSRestController
      * [Example response]<br/>
      * <pre>.
      *
-     {
-     "firstName": "Jane",
-     "lastName": "Doe",
-     "customerId": "00000000-0000-474c-b092-b0dd880c07e2",
-     "points": 206,
-     "usedPoints": 100,
-     "expiredPoints": 0,
-     "level": "14.00%",
-     "levelName": "level0",
-     "nextLevel": "15.00%",
-     "nextLevelName": "level1",
-     "transactionsAmountWithoutDeliveryCosts": 3,
-     "transactionsAmountToNextLevel": 17,
-     "averageTransactionsAmount": "3.00",
-     "transactionsCount": 1,
-     "transactionsAmount": 3,
-     "currency": "eur",
-     }
+     * {
+     * "firstName": "Jane",
+     * "lastName": "Doe",
+     * "customerId": "00000000-0000-474c-b092-b0dd880c07e2",
+     * "points": 206,
+     * "usedPoints": 100,
+     * "expiredPoints": 0,
+     * "level": "14.00%",
+     * "levelName": "level0",
+     * "nextLevel": "15.00%",
+     * "nextLevelName": "level1",
+     * "transactionsAmountWithoutDeliveryCosts": 3,
+     * "transactionsAmountToNextLevel": 17,
+     * "averageTransactionsAmount": "3.00",
+     * "transactionsCount": 1,
+     * "transactionsAmount": 3,
+     * "currency": "eur",
+     * }
      * </pre>
      *
      * @Route(name="oloy.customer.get_status", path="/customer/{customer}/status")
@@ -289,8 +290,8 @@ class CustomerController extends FOSRestController
      * @ApiDoc(
      *     name="Register Customer",
      *     section="Customer",
-     *     input={"class" = "OpenLoyalty\Bundle\UserBundle\Form\Type\CustomerRegistrationFormType", "name" = "customer"},
-     *     statusCodes={
+     *     input={"class" = "OpenLoyalty\Bundle\UserBundle\Form\Type\CustomerRegistrationFormType", "name" =
+     *     "customer"}, statusCodes={
      *       200="Returned when successful",
      *       400="Returned when form contains errors",
      *     }
@@ -302,9 +303,9 @@ class CustomerController extends FOSRestController
     {
         $loggedUser = $this->getUser();
 
-        $formOptions = [];
+        $formOptions                   = [];
         $formOptions['includeLevelId'] = true;
-        $formOptions['includePosId'] = true;
+        $formOptions['includePosId']   = true;
 
         $form = $this->get('form.factory')->createNamed(
             'customer',
@@ -321,8 +322,8 @@ class CustomerController extends FOSRestController
             $user = $this->get('oloy.user.form_handler.customer_registration')->onSuccess($customerId, $form);
 
             if ($user instanceof User) {
-                $levelId = $form->get('levelId')->getData();
-                $posId = $form->get('posId')->getData();
+                $levelId    = $form->get('levelId')->getData();
+                $posId      = $form->get('posId')->getData();
                 $agreement2 = $form->get('agreement2')->getData();
                 $commandBus = $this->get('broadway.command_handling.command_bus');
 
@@ -350,7 +351,7 @@ class CustomerController extends FOSRestController
                 return $this->view(
                     [
                         'customerId' => $customerId->__toString(),
-                        'email' => $user->getEmail(),
+                        'email'      => $user->getEmail(),
                     ]
                 );
             }
@@ -371,8 +372,8 @@ class CustomerController extends FOSRestController
      * @ApiDoc(
      *     name="Register Customer",
      *     section="Customer",
-     *     input={"class" = "OpenLoyalty\Bundle\UserBundle\Form\Type\CustomerSelfRegistrationFormType", "name" = "customer"},
-     *     statusCodes={
+     *     input={"class" = "OpenLoyalty\Bundle\UserBundle\Form\Type\CustomerSelfRegistrationFormType", "name" =
+     *     "customer"}, statusCodes={
      *       200="Returned when successful",
      *       400="Returned when form contains errors",
      *     }
@@ -406,7 +407,7 @@ class CustomerController extends FOSRestController
                 return $this->view(
                     [
                         'customerId' => $customerId->__toString(),
-                        'email' => $user->getEmail(),
+                        'email'      => $user->getEmail(),
                     ]
                 );
             }
@@ -445,9 +446,9 @@ class CustomerController extends FOSRestController
             CustomerEditFormType::class,
             [],
             [
-                'method' => 'PUT',
+                'method'         => 'PUT',
                 'includeLevelId' => true,
-                'includePosId' => true,
+                'includePosId'   => true,
             ]
         );
 
@@ -460,8 +461,8 @@ class CustomerController extends FOSRestController
                 return $this->view($ret, Response::HTTP_BAD_REQUEST);
             }
 
-            $levelId = $form->get('levelId')->getData();
-            $posId = $form->get('posId')->getData();
+            $levelId    = $form->get('levelId')->getData();
+            $posId      = $form->get('posId')->getData();
             $commandBus = $this->get('broadway.command_handling.command_bus');
             if ($posId) {
                 $commandBus->dispatch(
@@ -475,11 +476,11 @@ class CustomerController extends FOSRestController
             }
 
             /** @var CustomerDetailsRepository $repo */
-            $repo = $this->get('oloy.user.read_model.repository.customer_details');
+            $repo     = $this->get('oloy.user.read_model.repository.customer_details');
             $customer = $repo->find($customer->getCustomerId()->__toString());
 
             if ($customer->isAgreement2()) {
-                $em = $this->getDoctrine()->getManager();
+                $em   = $this->getDoctrine()->getManager();
                 $user = $em->getRepository('OpenLoyaltyUserBundle:Customer')->findOneBy(['id' => $customer->getId()]);
                 $this->dispatchNewsletterSubscriptionEvent($user, $customer->getCustomerId());
             }
@@ -642,7 +643,7 @@ class CustomerController extends FOSRestController
      */
     public function activateAccountAction($token)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em   = $this->getDoctrine()->getManager();
         $user = $em->getRepository('OpenLoyaltyUserBundle:Customer')->findOneBy(['actionToken' => $token]);
 
         if ($user instanceof Customer && $token == $user->getActionToken()) {
@@ -655,7 +656,7 @@ class CustomerController extends FOSRestController
 
             $customerId = new CustomerId($user->getId());
 
-            $repo = $this->get('oloy.user.read_model.repository.customer_details');
+            $repo     = $this->get('oloy.user.read_model.repository.customer_details');
             $customer = $repo->find($user->getId());
             if ($customer->isAgreement2()) {
                 $this->dispatchNewsletterSubscriptionEvent($user, $customerId);
@@ -697,7 +698,8 @@ class CustomerController extends FOSRestController
         if ($user instanceof Customer) {
             $user->setActionToken(substr(md5(uniqid(null, true)), 0, 20));
             $user->setReferralCustomerEmail($referralCustomerEmail);
-            $url = $this->container->getParameter('frontend_activate_account_url').'/'.$user->getActionToken();
+            $url = $this->container->getParameter('frontend_customer_panel_url').
+                   $this->container->getParameter('frontend_activate_account_url').'/'.$user->getActionToken();
         }
         $this->getDoctrine()->getManager()->flush();
 

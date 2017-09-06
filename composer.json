@@ -105,6 +105,9 @@
         "bin-dir": "var/bin"
     },
     "extra": {
+        "branch-alias": {
+            "dev-master": "1.2.x-dev"
+        },
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
